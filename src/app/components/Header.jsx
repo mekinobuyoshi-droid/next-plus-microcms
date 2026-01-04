@@ -3,7 +3,7 @@ const Header = () => {
     return (
 <header className="border-b border-gray-100 bg-white sticky top-0 z-50">
   <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-    <h1 className="text-xl font-black tracking-tighter">
+    <h1 className="text-2xl font-black tracking-tight">
       <Link href="/">
         SAMPLE <span className="text-blue-600">CORP.</span>
       </Link>

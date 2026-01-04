@@ -2,7 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
 
+  --font-family-base: var(--font-roboto), var(--font-noto-sans), sans-serif;
+}
+
+body {
+  font-family: var(--font-family-base);
+}
 
 
 
