@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
     <html lang="ja" className={`${noto.variable} ${roboto.variable}`}>
       <body>
         <Header />
-        <main className="container mx-auto p-4">
+        <main>
         {children}
         </main>
         <Footer />

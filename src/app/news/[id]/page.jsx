@@ -23,7 +23,7 @@ const NewsDetail = async ({params}) => {
     const {getDate} = formatDate(news.publishedAt);
     return (
         
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto p-4">
             <Breadcrumbs title={news.title} id={news.id} />
             <h2 className="text-3xl text-center font-bold mb-7">{news.title}</h2>
             <div className="mb-7">
