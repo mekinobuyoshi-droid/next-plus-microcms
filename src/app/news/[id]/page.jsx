@@ -4,8 +4,10 @@ import Breadcrumbs from "@/app/components/Breadcrumbs";
 export const generateMetadata = async ({params}) => {
     const {id} = await params;
     const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news/${id}`,{
-        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY},
-        },{ cache: 'no-store' });
+        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
+        cache: 'no-store',
+        },
+        },);
     const news = await respons.json();
 
     return {
@@ -16,8 +18,10 @@ export const generateMetadata = async ({params}) => {
 const NewsDetail = async ({params}) => {
         const {id} = await params;
     const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news/${id}`,{
-        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY},
-        },{ cache: 'no-store' },);
+        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
+        cache: 'no-store'
+        },
+        },);
     const news = await respons.json();
     console.log(news);
     const {getDate} = formatDate(news.publishedAt);
