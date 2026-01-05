@@ -5,8 +5,9 @@ export const generateMetadata = async ({params}) => {
     const {id} = await params;
     const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news/${id}`,{
         headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
-        cache: 'no-store',
+
         },
+        cache: 'no-store',
         },);
     const news = await respons.json();
 
@@ -19,8 +20,9 @@ const NewsDetail = async ({params}) => {
         const {id} = await params;
     const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news/${id}`,{
         headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
-        cache: 'no-store'
+
         },
+        cache: 'no-store',
         },);
     const news = await respons.json();
     console.log(news);

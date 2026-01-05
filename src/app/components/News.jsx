@@ -6,8 +6,8 @@ const News = async ({limit}) =>  {
     const query = limit ? `?limit=${limit}` : "";
     const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news${query}`,{
         headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
-        cache: 'no-store',
         },
+        cache: 'no-store',
         },);
 
     const data = await respons.json();
