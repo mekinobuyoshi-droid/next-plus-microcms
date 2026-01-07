@@ -6,7 +6,7 @@ export const metadata =  {
 
 const AllNews = () => {
     return (
-        <div className="container mx-auto p-4">
+        <div className="container mx-auto p-4 min-h-[80vh]">
          <Breadcrumbs />
          <div className="mb-8 border-b-[3px] border-black pb-3">
              <h2 className="text-2xl font-bold">ニュース＆お知らせ</h2>

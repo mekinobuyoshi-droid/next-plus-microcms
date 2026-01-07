@@ -13,16 +13,16 @@ const News = async ({limit}) =>  {
     const data = await respons.json();
         return (
                 <div>
-                    <ul className="flex flex-col gap-y-4">
+                    <ul className="flex flex-col gap-y-4  mb-20">
                         {data.contents?.map((content) => {
-                            const {getDate} = formatDate(content.publishedAt);
+                            const {getDate} = formatDate(content?.publishedAt);
                             return (
 
-                            <li key={content.id}>
-                                <Link href={`/news/${content.id}`} className="flex items-center gap-x-4 ">
-                                    <span>{getDate}</span>
-                                    <CategoryLabel  name={content.category.name} size={"text-xs"} />
-                                    <span className="text-blue-600 visited:text-purple-600 hover:underline">{content.title}</span>
+                            <li key={content?.id}>
+                                <Link href={`/news/${content?.id}`} className="flex items-center gap-x-4 ">
+                                    <span className="inline-block min-w-[5.5em]">{getDate}</span>
+                                    <CategoryLabel  name={content.category?.name} size={"text-xs"} />
+                                    <span className="text-blue-600 visited:text-purple-600 hover:underline line-clamp-2">{content?.title}</span>
                                 </Link>
                             </li>
                             )

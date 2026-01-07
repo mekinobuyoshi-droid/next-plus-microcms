@@ -26,17 +26,17 @@ const NewsDetail = async ({params}) => {
         },);
     const news = await respons.json();
     console.log(news);
-    const {getDate} = formatDate(news.publishedAt);
+    const {getDate} = formatDate(news?.publishedAt);
     return (
 
-        <div className="container mx-auto p-4">
-            <Breadcrumbs title={news.title} id={news.id} />
-            <h2 className="text-3xl text-center font-bold mb-7">{news.title}</h2>
+        <div className="container mx-auto p-4 min-h-[80vh]">
+            <Breadcrumbs title={news?.title} id={news?.id} />
+            <h2 className="text-3xl text-center font-bold mb-7">{news?.title}</h2>
             <div className="mb-7">
-                <CategoryLabel name={news.category.name} size={"text-base"}/>
+                <CategoryLabel name={news?.category?.name} size={"text-base"}/>
                 <span className="text-base inline-block ml-4">{`更新日時 : ${getDate}`}</span>
             </div>
-            <div dangerouslySetInnerHTML={{__html: news.content}} className="prose prose-slate prose-blue max-w-none"></div>
+            <div dangerouslySetInnerHTML={{__html: news.content}} className="prose prose-slate prose-blue max-w-none mb-20"></div>
         </div>
     )
 };
