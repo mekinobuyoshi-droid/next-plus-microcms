@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js + ヘッドレスCMS（コーポレートサイト・ニュース管理）
 
-## Getting Started
+コーポレートサイトのニュースセクションを、microCMSとNext.js（App Router）を用いて構築したプロジェクトです。保守性と運用のしやすさを重視した設計を行っています。
 
-First, run the development server:
+## 🛠 使用技術（Tech Stack）
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Framework:** Next.js (App Router)
+- **Styling:** Tailwind CSS
+- **Headless CMS:** microCMS
+- **Validation:** Zod
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## こだわったポイント
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 1. コーポレートサイトにおける柔軟な情報発信
+企業の「お知らせ」や「更新情報」を、エンジニアの手を介さず運用担当者が直接更新できるよう、**microCMS** を導入しました。これにより、情報の即時性を高めつつ、運用コストを削減する仕組みを構築しました。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 2. Tailwind CSSによる効率的なUI実装とデザイン管理
+企業のブランドイメージを保ちつつ効率的にスタイリングを行うため、**Tailwind CSS** を採用しました。レスポンシブ対応やコンポーネントの再利用性を高めることで、修正に強いコードベースを維持しています。
 
-## Learn More
+### 3. Zodを用いた「止まらない」サイト設計
+企業の公式サイトにおいて、データの不備によるエラー表示やクラッシュは信頼性を損なうため、**Zod** による厳格なバリデーションを実装しています。
+- **条件付きスキーマ判定:** APIの「一覧取得」と「詳細取得」で異なるレスポンス構造を判定し、それぞれの状況に応じた適切なバリデーションを適用しています。
+- **フェイルセーフ設計:** 外部APIからのデータ取得で万が一欠損が発生しても、UIが停止しないようフォールバックデータを返却し、サイト全体の稼働（可用性）を最優先する設計にしました。
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 開発の背景と解決した課題
+開発過程で、APIからの特定のプロパティ（例：`category.name`）が未設定だった際に、ページ全体がクラッシュする事象に直面しました。「コーポレートサイトとして絶対に落とせない」という観点から、フロントエンド側でデータの整合性を担保する重要性を再認識し、Zodによるバリデーションを導入。本番環境での信頼性を大幅に向上させました。

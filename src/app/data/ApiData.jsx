@@ -8,13 +8,13 @@ const  ApiData = async(query) => {
                 name : z.string(),
             }),
             content: z.string(),
-        }).passthrough();
+        });
 
         const newsListSchema = z.object({
             "contents" : z.array(newsSchema),
             "totalCount" : z.number(),
             "limit" : z.number(),
-        }).passthrough();
+        });
 
         try{
             const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news${query}`,{
@@ -27,9 +27,17 @@ const  ApiData = async(query) => {
             }
             const data = await respons.json();
 
-            // const validatedData = newsSchema.parse(data);
+            if(data.contents && Array.isArray(data.contents)) {
 
-            return {data};
+                const validatedData = newsListSchema.parse(data);
+                return {data: validatedData};
+
+            } else {
+                const validatedData = newsSchema.parse(data);
+                return {data: validatedData};
+            }
+
+
 
         }catch (error) {
             console.error(error.message);
