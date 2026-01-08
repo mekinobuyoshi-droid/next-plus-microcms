@@ -1,16 +1,11 @@
 import { formatDate } from "../utils/formatDate";
 import Link from "next/link";
 import CategoryLabel from "./CategoryLabel";
+import ApiData from "../data/ApiData";
 
 const News = async ({limit}) =>  {
     const query = limit ? `?limit=${limit}` : "";
-    const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news${query}`,{
-        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
-        },
-        cache: 'no-store',
-        },);
-
-    const data = await respons.json();
+     const {data} = await ApiData(query);
         return (
                 <div>
                     <ul className="flex flex-col gap-y-4  mb-20">

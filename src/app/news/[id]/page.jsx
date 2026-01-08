@@ -1,42 +1,31 @@
 import { formatDate } from "@/app/utils/formatDate";
+import ApiData from "@/app/data/ApiData";
 import CategoryLabel from "@/app/components/CategoryLabel";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 export const generateMetadata = async ({params}) => {
     const {id} = await params;
-    const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news/${id}`,{
-        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
-
-        },
-        cache: 'no-store',
-        },);
-    const news = await respons.json();
+    const {data} = await ApiData(`/${id}`);
 
     return {
-        title: news.title,
+        title: data?.title,
     }
 };
 
 const NewsDetail = async ({params}) => {
-        const {id} = await params;
-    const respons = await fetch(`https://tmgqc7gqd7.microcms.io/api/v1/news/${id}`,{
-        headers: {"X-MICROCMS-API-KEY" : process.env.MICROCMS_API_KEY,
+    const {id} = await params;
+    const {data} = await ApiData(`/${id}`);
 
-        },
-        cache: 'no-store',
-        },);
-    const news = await respons.json();
-    console.log(news);
-    const {getDate} = formatDate(news?.publishedAt);
+    const {getDate} = formatDate(data?.publishedAt);
     return (
 
         <div className="container mx-auto p-4 min-h-[80vh]">
-            <Breadcrumbs title={news?.title} id={news?.id} />
-            <h2 className="text-3xl text-center font-bold mb-7">{news?.title}</h2>
+            <Breadcrumbs title={data?.title} id={data?.id} />
+            <h2 className="text-3xl text-center font-bold mb-7">{data?.title}</h2>
             <div className="mb-7">
-                <CategoryLabel name={news?.category?.name} size={"text-base"}/>
+                <CategoryLabel name={data?.category?.name} size={"text-base"}/>
                 <span className="text-base inline-block ml-4">{`更新日時 : ${getDate}`}</span>
             </div>
-            <div dangerouslySetInnerHTML={{__html: news.content}} className="prose prose-slate prose-blue max-w-none mb-20"></div>
+            <div dangerouslySetInnerHTML={{__html: data.content}} className="prose prose-slate prose-blue max-w-none mb-20"></div>
         </div>
     )
 };
